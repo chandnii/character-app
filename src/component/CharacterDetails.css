@@ -1,67 +1,65 @@
-/* CharacterDetails.css */
-
 .character-details-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-  }
-  
-  .character-details {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 800px;
-    width: 100%;
-    display: flex; /* Added */
-    flex-direction: column; /* Added */
-    align-items: center; /* Added */
-  }
-  
-  .character-details-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .character-name {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .character-image {
-    width: 200px;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .character-details-body {
-    padding: 20px;
-    text-align: left; /* Added */
-  }
-  
-  .character-details-body p {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #666;
-  }
-  
-  .button-go-back {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px; /* Added */
-  }
-  
-  .button-go-back:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #000; /* Dark background */
+}
+
+.character-details {
+  background-color: #333; /* Dark card background */
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow effect */
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-details-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.character-name {
+  font-size: 1.5rem;
+  color: #fff; /* White text */
+  margin-bottom: 10px;
+}
+
+.character-image {
+  width: 100%; /* Full width */
+  max-height: 400px; /* Limit height */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 10px;
+}
+
+.character-details-body {
+  padding: 20px;
+  text-align: left;
+}
+
+.character-details-body p {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ccc; /* Lighter text */
+}
+
+.button-go-back {
+  background-color: #60b529db; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.button-go-back:hover {
+  background-color: #60b529db; /* Darker red on hover */
+}
