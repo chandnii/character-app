@@ -6,7 +6,7 @@ const CharacterDetailsWrapper = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   useEffect(() => {
     // Fetch character details when component mounts or id changes
