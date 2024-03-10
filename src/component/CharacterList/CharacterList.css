@@ -1,124 +1,42 @@
-.character-list {
-  position: relative;
-  padding: 20px;
-  text-align: center;
-}
-
-.search-filter-icons {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  transform: translateY(-86%); /* Adjusted position */
-  display: flex;
-  align-items: center;
-}
-
-.search-filter-icons i {
-  font-size: 24px;
-  padding: 8px;
-  margin-right: 10px; /* Add margin between icons */
-  cursor: pointer;
-}
-
-.search-filter-icons i:hover {
-  border: 2px solid #555;
-  border-radius: 50%;
-  background-color: #fff;
-  color: #555;
-}
-
-.search-filter-icons i[data-text]::after {
-  content: attr(data-text);
-  display: inline-block;
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #555;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.search-filter-icons i:hover[data-text]::after {
-  opacity: 1;
-}
-
-
-.search-filter-icons i:hover[data-text]::after {
-  opacity: 1;
-}
-
-.filter-toggle {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin-right: 10px; /* Add margin between buttons */
-}
-
-
-.filter-popup {
-  position: absolute;
-  top: 50px; /* Adjust the distance from the top */
-  right: 20px; /* Adjust the distance from the right */
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  z-index: 999;
-}
-
-.close-icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
-  color: #555;
-}
-
 .character-grid {
   grid-gap: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr)); /* Adjusted grid */
+  margin: 0 20px; /* Add margin to the left and right sides of the grid */
 }
 
 .character-card {
-    background-color: #333;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #0000001a;
-    color: #333;
-    display: flex;
-    overflow: hidden;
-    text-decoration: none;
-    transition: transform .3s ease,box-shadow .3s ease;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #0000001a;
+  color: #333;
+  display: flex;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
 }
 
-.character-card:last-child {
-  margin-right: 0; /* Remove margin from the last card to prevent overflow */
+.character-card:hover {
+  transform: translateY(-5px); /* Adjusted hover effect */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Adjusted box shadow on hover */
 }
 
 .character-thumbnail {
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    height: auto;
-    object-fit: cover;
-    width: 40%;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  height: auto;
+  object-fit: cover;
+  width: 40%;
 }
 
 .character-info {
+  flex-grow: 1; /* Allow the info section to expand to fill remaining space */
   padding: 20px;
 }
 
 .character-name {
   font-size: 1.5rem;
-  color: #555;
+  color: #fff;
   margin-bottom: 10px;
 }
 
@@ -132,67 +50,60 @@
   color: #777;
 }
 
-.pagination-bottom-right {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-}
-
-.pagination-bottom-right button {
-  margin: 0 5px;
-}
-
-.lazy-loading-toggle {
+.skeleton-loader {
   display: flex;
-  align-items: center;
-  margin-left: 10px; /* Adjust the margin as needed */
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.lazy-loading-toggle input[type="checkbox"] {
-  margin-right: 5px; /* Adjust the spacing between the checkbox and label */
+.skeleton-loader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.loader {
-  background-color: #333;
+.skeleton-card {
+  width: calc(33.33% - 20px); /* Adjust width to fit three cards in one row */
+  margin-bottom: 20px; /* Add margin between cards */
+  background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 0 20px #0000001a;
-  color: #333;
-  display: flex;
   overflow: hidden;
-  text-decoration: none;
-  transition: transform .3s ease, box-shadow .3s ease;
 }
 
-.loader .loader-content {
-  padding: 20px;
-  width: 100%; /* Ensure the loader takes up the full width */
+.skeleton-thumbnail,
+.skeleton-info {
+  opacity: 0.5; /* Set opacity to make the skeleton UI appear faded */
 }
 
-.loader .loader-thumbnail {
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  height: auto;
-  object-fit: cover;
+.skeleton-thumbnail {
   width: 40%;
+  height: 100%;
 }
 
-.loader .loader-info {
+.skeleton-info {
   padding: 20px;
 }
 
-.loader .loader-name {
-  font-size: 1.5rem;
-  color: #555;
-  margin-bottom: 10px;
+.skeleton-name,
+.skeleton-status,
+.skeleton-species {
+  width: 100%;
+  height: 16px;
+  background-color: #d9d9d9;
+  margin-bottom: 8px;
 }
 
-.loader .loader-status {
-  font-size: 1rem;
-  margin-bottom: 5px;
+
+
+
+@media screen and (max-width: 768px) {
+  .character-grid {
+    grid-template-columns: repeat(2, minmax(250px, 1fr)); /* Change to two columns on smaller screens */
+  }
 }
 
-.loader .loader-species {
-  font-size: 0.9rem;
-  color: #777;
+@media screen and (max-width: 480px) {
+  .character-grid {
+    grid-template-columns: repeat(1, minmax(250px, 1fr)); /* Change to one column on even smaller screens */
+  }
 }
-

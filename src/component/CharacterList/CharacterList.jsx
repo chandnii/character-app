@@ -4,7 +4,6 @@ import { AiOutlineSearch, AiOutlineFilter } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
 
 import "./CharacterList.css";
-const placeholderImage = 'https://via.placeholder.com/150';
 
 function CharacterList() {
   // Define state variables using useState hook
@@ -112,16 +111,27 @@ function CharacterList() {
     setInitialLoad(true);
   };
 
-  const handleSearchClick = () => {
-    setSearching(true);
+  // Debounce function to delay execution of a function
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
   };
 
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
+    // If the input length is greater than or equal to 3, trigger search
+    if (event.target.value.length >= 3) {
+      // Debounce search function to delay execution
+      debouncedSearch();
+    }
   };
 
   const handleSearch = async () => {
     // Handler for search button click
+    setSearching(true);
     try {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?name=${searchInput}`,
@@ -132,8 +142,13 @@ function CharacterList() {
       setSearching(false);
     } catch (error) {
       console.error("Error fetching characters:", error);
+      setSearching(false);
     }
   };
+
+  // Debounce the search function
+  const debouncedSearch = debounce(handleSearch, 300);
+
 
   const handleFilterClick = async () => {
     setFilterVisible(!filterVisible);
@@ -160,39 +175,32 @@ function CharacterList() {
   return (
     <div>
       {loading ? (
-        <div className="loader">
-          <img
-            src={placeholderImage} // Add your loader image source here
-            alt="Loader"
-            className="loader-thumbnail"
-          />
-          <div className="loader-info">
-            <h2 className="loader-name">Loading...</h2>
-            {/* Add other loader information if needed */}
+        <div className="loader-container">
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="loader">
+            <div className="loader-thumbnail"></div>
+            <div className="loader-info">
+              <div className="loader-name"></div>
+              <div className="loader-status"></div>
+              <div className="loader-species"></div>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
       ) : (
         <>
           <div className="character-list">
             {error && <div className="error-message">{error}</div>}
             <div className="search-filter-icons">
-              {!searching ? (
-                // Render search icon if not searching
-                <i onClick={handleSearchClick} data-text="Search">
-                  <AiOutlineSearch />
-                </i>
-              ) : (
-                // Render search input if searching
-                <div className="search-input">
-                  <input
-                    type="text"
-                    placeholder="Search character..."
-                    value={searchInput}
-                    onChange={handleSearchInputChange}
-                  />
-                  <button onClick={handleSearch}>Search</button>
-                </div>
-              )}
+              <div className="search-input">
+                <input
+                  type="text"
+                  placeholder="Search character..."
+                  value={searchInput}
+                  onChange={handleSearchInputChange}
+                />
+                <AiOutlineSearch onClick={handleSearch} />
+              </div>
               <i onClick={handleFilterClick} data-text="Filter">
                 <AiOutlineFilter />
               </i>{" "}
@@ -229,7 +237,7 @@ function CharacterList() {
               {characters.map((character, index) => (
                 <Link
                   to={`/characters/${character.id}`}
-                  key={character.id}
+                  key={`${character.id}-${index}`}
                   className="character-card"
                 >
                   <img
