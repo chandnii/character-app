@@ -1,0 +1,19 @@
+.switcher {
+  position: fixed;
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+}
+
+.switcher-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Optional: Hover effect */
+.switcher-button:hover {
+  background-color: #0056b3;
+}

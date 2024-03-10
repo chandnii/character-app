@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './CharacterDetails.css';
+import '../Loader/Loader'
 
 const CharacterDetailsWrapper = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true); // State to track loading status
-  const [error] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch character details when component mounts or id changes
@@ -17,7 +18,11 @@ const CharacterDetailsWrapper = () => {
         setCharacter(data);
         setLoading(false);
       })
-      .catch(error => console.error('Error fetching character details:', error));
+      .catch(error => {
+        console.error('Error fetching character details:', error);
+        setError(error);
+        setLoading(false); // Set loading to false in case of error
+      });
   }, [id]); // Run effect whenever id changes
 
   const handleGoBack = () => {
@@ -28,7 +33,9 @@ const CharacterDetailsWrapper = () => {
   return (
     <div className="character-details-container">
       {loading ? (
-        <div className="loader"></div>
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
       ) : (
         error ? ( // Display error message if API request fails
           <p>Error: {error}</p>
